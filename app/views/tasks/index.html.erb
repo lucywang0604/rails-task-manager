@@ -1,0 +1,19 @@
+<h1>My Tasks</h1>
+
+<ul>
+  <% @tasks.each do |task| %>
+    <li>
+      <!-- Checkbox for each task -->
+      <%= check_box_tag "task_#{task.id}", task.id, task.completed %>
+
+      <!-- Task title with link to show page -->
+      <%= link_to task.title, task_path(task) %>
+      <!-- Delete button with a trashcan icon -->
+      <%= link_to task_path(task), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this task?" }, class: "text-danger ml-2" do %>
+        <i class="fas fa-trash-alt"></i>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to '+ Add a new task', new_task_path, class: 'btn btn-success' %>
